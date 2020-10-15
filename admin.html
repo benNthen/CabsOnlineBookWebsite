@@ -1,0 +1,30 @@
+<html> 
+<head> 
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="php_styles.css">
+	<script type ="text/javascript" src="objxhr.js"> </script>
+	<script type="text/javascript" src="reqajax.js"> </script>
+</head> 
+
+<body>
+<div id="wrapper">
+	<h2>Admin's Page</h2>
+	<form method = "POST">
+
+		<label for ="bookID">Enter Booking Reference #: </label>
+		 <input type="text" id="bookID" pattern ="[0-9]+" title="Please only enter numbers 0-9" required>
+		<br><br>
+
+		<input name = "retrieve" id="retrieve" type ="button" onClick="getReq('searchrequest.php','regShow', bookID.value)" value = "Show Requests" class="btn">
+
+		<br><br>
+		<input name = "assign" id= "assign" type = "button" onClick="getReq('assignrequest.php','regShow', bookID.value)" value = "Assign Taxi" class="btn">
+
+	</form>
+	
+	<div id="regShow">
+		<p> </p>
+	</div>
+</div>
+</body> 
+</html>
