@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<head> 
+	<title> Booking HTML with Javascript </title>
+	<link rel="stylesheet" type="text/css" href="form_styles.css">
+	<script type ="text/javascript" src="objxhr.js"> </script>
+	<script type="text/javascript" src="dataajax.js"> </script>
+	
+</head> 
+
+<body>
+<div id="wrapper">
+	<h2>Taxi Booking From</h2>
+	<form>
+		<label>Customer Name:</label> <br>
+			<input type="text" name="namefield" id="namefield" pattern ="[a-z A-B]+" class="textInput" minlength ="3" title="Please enter a valid name that is more than 3 letters long" required>
+		<br><br>
+
+		<label>Contact Phone:</label> <br>
+			<input type="text" name="phone" id="phone"  pattern ="[0-9]+" class="textInput" minlength ="7" title="Enter a valid phone number [0-9]" required>
+		<br><br>
+		
+		<label>Pick-up Address:</label> <br>
+			<input type="text" name="address" id="address" pattern ="[A-Z a-z 0-9]+"  class="textInput" minlength ="7" title="Enter your pick-up address" required>
+		<br><br>
+
+		<label>Destination Suburb:</label> <br>
+			<input type="text" name="dest" id="dest" pattern ="[A-Z a-z 0-9]+"  class="textInput"  minlength ="7" title="Enter the destination suburb" required>
+		<br><br>
+		
+		<label for="dispdateID">Current Date & Time:</label>
+			<input type="text" id="dispdate" value="dispdate" disabled="disabled" class="textInput" />
+			<input type="hidden" id="datetime" value="datetime">
+		<br><br>
+		
+		<input type = "submit" id="Book" onClick="getData('form.php','regSpan',namefield.value,phone.value,address.value, dest.value, datetime.value)" value="Book" class="btn" >
+
+		<div id="regSpan">
+			<p> </p>
+		</div>
+	</form>
+  </div>
+</body>
+</html>
+<script> 
+//Extract a valid date
+var date = new Date();
+
+var day = date.getDate();
+var month = date.getMonth() + 1;
+var year = date.getFullYear();
+var hour = date.getHours();
+var minutes = date.getMinutes();
+var merid;
+var seconds = date.getSeconds();
+
+//Ensures that seconds and minutes are the right format
+if (seconds < 10) seconds = "0" + seconds;
+if (minutes < 10) minutes = "0" + minutes;
+
+//Display AM/PM for 12 hour format display
+if (hour >= 12) merid = "PM";
+if (hour < 12) merid = "AM"; 
+
+//Ensures that months and days are the right format
+if (month < 10) month = "0" + month;
+if (day < 10) day = "0" + day;
+
+//Format and display a 12-hour clock inside Date & Time input box
+var display = day + "/" + month + "/" +year + " " + hour + ":" + minutes + " " + merid;
+
+//Format a hidden 24-hour clock with Y-m-d H:i:s that is the actual data to be extracted
+var today = year + "-" + month + "-" +day + " " + hour + ":" + minutes + ":" + seconds;
+
+//Attach variables to these elements on the form
+document.getElementById('datetime').value = today;
+document.getElementById('dispdate').value = display;
+</script>
